@@ -70,7 +70,7 @@ code = {'E0020': ' ', 'E0021': '!', 'E0022': '"', 'E0023': '#', 'E0024': '$', 'E
 'E0073': 's', 'E0074': 't', 'E0075': 'u', 'E0076': 'v', 'E0077': 'w', 'E0078': 'x', 
 'E0079': 'y', 'E007A': 'z', 'E007B': '{', 'E007C': '|', 'E007D': '}', 'E007E': '~'}
 
-
+# Reads the file and outputs to stdout
 def read():
     with open (f"{text_file}", encoding='utf-8') as f:
         print(CYEL + "\n" + "#" * 50 + CYEND)
@@ -79,6 +79,7 @@ def read():
         print(f"\n{read}\n")
         print(CYEL + "#" * 50 + CYEND)
 
+# Reads the file line by line including any encoding and outputs to stdout
 def readlines():
     with open (f"{text_file}", encoding='utf-8') as f:
         print(f"\n File line data >: \n")
@@ -86,6 +87,7 @@ def readlines():
         print(f"\n{lines}\n")
         print(CYEL + "#" * 50 + CYEND + "\n")
 
+# Stores the character codes to file in uppercase and formats using sed
 def retrieve():
     tags = input(CGRE + f"\nCopy and paste your Unicode tag character codes here excluding the first \ >: \\" + CGEND)
     prefix = input(CGRE + f"\nEnter any prefix that is present on your unicode i.e U000 or U+ >: " + CGEND)
@@ -96,6 +98,7 @@ def retrieve():
     print(CGRE + f"\n\nformatting unicode tags into bytes per line and outputting to file >: ./clean_tags.txt\n" + CGEND)
     os.system(clean)
 
+# Decodes the stored character codes and outputs to stdout
 def decode():
     print(CGRE + "\nDecoded Unicode tag character codes >:  \n\n" + CGEND)
     f = open('clean_tags.txt')
@@ -105,6 +108,7 @@ def decode():
         print(CRED + code.get(line) + CYEND, end="")
     print("\n\n")
 
+# Execute the program
 def tags_mcgee():
     print(CRED + f"{banner}" + CYEND)
     prompt = input(CGRE + "Would you like to see info >: y/n " + CGEND)
