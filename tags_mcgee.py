@@ -3,33 +3,6 @@ from sys import argv
 import os
 
 # Usage information
-def error():            
-    if len(sys.argv) < 2:
-        print(f"\nERROR [NOT ENOUGH ARGUMENTS]")
-        print(f"\nUSAGE: \tpython3 ./tags_mcgee.py file_with_tags.txt\n")
-        sys.exit(1)
-# Runs first to check if the required number of arguments have been provided
-error()
-# arguments list = the script name and the text file
-script,text_file = argv
-
-# Defined colors
-CRED = '\033[91m'     
-CREND = '\033[0m'
-CYEL = '\033[33m'
-CYEND = '\033[0m'
-CGRE = '\33[92m'
-CGEND = '\33[0m'
-
-banner = """       
-
-▄▄▄█████▓ ▄▄▄        ▄████   ██████     ███▄ ▄███▓ ▄████▄    ▄████ ▓█████ ▓█████ 
-▓  ██▒ ▓▒▒████▄     ██▒ ▀█▒▒██    ▒    ▓██▒▀█▀ ██▒▒██▀ ▀█   ██▒ ▀█▒▓█   ▀ ▓█   ▀ 
-import sys
-from sys import argv
-import os
-
-# Usage information
 def error():
     if len(sys.argv) < 2:
         print(f"\nERROR [NOT ENOUGH ARGUMENTS]")
@@ -147,38 +120,3 @@ def tags_mcgee():
     decode()
 
 tags_mcgee()
-
-def retrieve():
-    tags = input(CGRE + f"\nCopy and paste your Unicode tag character codes here excluding the first \ >: \\" + CGEND)
-    prefix = input(CGRE + f"\nEnter any prefix that is present on your unicode i.e U000 or U+ >: " + CGEND)
-    f = open('tags.txt', 'w')
-    f.write(tags.upper())
-    f.close()
-    clean = r"sed -e 's/\\/\n/g' -e " + f"'s/{prefix}/''/g' " + 'tags.txt' + " > " "clean_tags.txt"
-    print(CGRE + f"\n\nformatting unicode tags into bytes per line and outputting to file >: ./clean_tags.txt\n" + CGEND)
-    os.system(clean)
-
-# Decodes the stored character codes and outputs to stdout
-def decode():
-    print(CGRE + "\nDecoded Unicode tag character codes >:  \n\n" + CGEND)
-    f = open('clean_tags.txt')
-    f_list = f.readlines()
-    for line in f_list:
-        line = line.rstrip()
-        print(CRED + code.get(line) + CYEND, end="")
-    print("\n\n")
-
-# Execute the program
-def tags_mcgee():
-    print(CRED + f"{banner}" + CYEND)
-    prompt = input(CGRE + "Would you like to see info >: y/n " + CGEND)
-    if prompt == "y":
-            print(f"{info}")
-    read()
-    readlines()
-    retrieve()
-    decode()
-
-tags_mcgee()
-
-
