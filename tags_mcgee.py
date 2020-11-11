@@ -38,7 +38,7 @@ banner = """
 info = """
 
 Tags is a Unicode block containing formatting tag characters (language tag and ASCII character tags).
-U+U0001, U+U0020–U+U007F were originally intended for invisibly tagging texts by language.
+U+0001, U+0020–U+007F were originally intended for invisibly tagging texts by language.
 
 This program takes the unicode character tag and decodes it into a readable format.
 
@@ -48,7 +48,7 @@ https://unicode.org
 
 https://en.wikipedia.org/wiki/Tags_(Unicode_block)
 
-https://www.compart.com/en/unicode/block/U+U0000
+https://www.compart.com/en/unicode/block/U+0000
 
 """
 
