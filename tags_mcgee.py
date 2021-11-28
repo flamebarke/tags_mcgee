@@ -3,7 +3,7 @@ from sys import argv
 import os
 
 # Usage information
-def error():            
+def error():
     if len(sys.argv) < 2:
         print(f"\nERROR [NOT ENOUGH ARGUMENTS]")
         print(f"\nUSAGE: \tpython3 ./tags_mcgee.py file_with_tags.txt\n")
@@ -14,33 +14,33 @@ error()
 script,text_file = argv
 
 # Defined colors
-CRED = '\033[91m'     
+CRED = '\033[91m'
 CREND = '\033[0m'
 CYEL = '\033[33m'
 CYEND = '\033[0m'
 CGRE = '\33[92m'
 CGEND = '\33[0m'
 
-banner = """       
+banner = """
 
-▄▄▄█████▓ ▄▄▄        ▄████   ██████     ███▄ ▄███▓ ▄████▄    ▄████ ▓█████ ▓█████ 
-▓  ██▒ ▓▒▒████▄     ██▒ ▀█▒▒██    ▒    ▓██▒▀█▀ ██▒▒██▀ ▀█   ██▒ ▀█▒▓█   ▀ ▓█   ▀ 
-▒ ▓██░ ▒░▒██  ▀█▄  ▒██░▄▄▄░░ ▓██▄      ▓██    ▓██░▒▓█    ▄ ▒██░▄▄▄░▒███   ▒███   
-░ ▓██▓ ░ ░██▄▄▄▄██ ░▓█  ██▓  ▒   ██▒   ▒██    ▒██ ▒▓▓▄ ▄██▒░▓█  ██▓▒▓█  ▄ ▒▓█  ▄ 
+▄▄▄█████▓ ▄▄▄        ▄████   ██████     ███▄ ▄███▓ ▄████▄    ▄████ ▓█████ ▓█████
+▓  ██▒ ▓▒▒████▄     ██▒ ▀█▒▒██    ▒    ▓██▒▀█▀ ██▒▒██▀ ▀█   ██▒ ▀█▒▓█   ▀ ▓█   ▀
+▒ ▓██░ ▒░▒██  ▀█▄  ▒██░▄▄▄░░ ▓██▄      ▓██    ▓██░▒▓█    ▄ ▒██░▄▄▄░▒███   ▒███
+░ ▓██▓ ░ ░██▄▄▄▄██ ░▓█  ██▓  ▒   ██▒   ▒██    ▒██ ▒▓▓▄ ▄██▒░▓█  ██▓▒▓█  ▄ ▒▓█  ▄
   ▒██▒ ░  ▓█   ▓██▒░▒▓███▀▒▒██████▒▒   ▒██▒   ░██▒▒ ▓███▀ ░░▒▓███▀▒░▒████▒░▒████▒
   ▒ ░░    ▒▒   ▓▒█░ ░▒   ▒ ▒ ▒▓▒ ▒ ░   ░ ▒░   ░  ░░ ░▒ ▒  ░ ░▒   ▒ ░░ ▒░ ░░░ ▒░ ░
     ░      ▒   ▒▒ ░  ░   ░ ░ ░▒  ░ ░   ░  ░      ░  ░  ▒     ░   ░  ░ ░  ░ ░ ░  ░
-  ░        ░   ▒   ░ ░   ░ ░  ░  ░     ░      ░   ░        ░ ░   ░    ░      ░   
+  ░        ░   ▒   ░ ░   ░ ░  ░  ░     ░      ░   ░        ░ ░   ░    ░      ░
                ░  ░      ░       ░            ░   ░ ░            ░    ░  ░   ░  ░
-                                                  ░                              
+                                                  ░
 """
 
-info = """ 
+info = """
 
 Tags is a Unicode block containing formatting tag characters (language tag and ASCII character tags).
-U+E0001, U+E0020–U+E007F were originally intended for invisibly tagging texts by language.
+U+0001, U+0020–U+007F were originally intended for invisibly tagging texts by language.
 
-This program takes the unicode character tag and decodes it into a readable format. 
+This program takes the unicode character tag and decodes it into a readable format.
 
 For further information refer:
 
@@ -48,27 +48,27 @@ https://unicode.org
 
 https://en.wikipedia.org/wiki/Tags_(Unicode_block)
 
-https://www.compart.com/en/unicode/block/U+E0000
+https://www.compart.com/en/unicode/block/U+0000
 
 """
 
 # Dictionary containing the unicode tags character codes and the corresponding symbol
-code = {'E0020': ' ', 'E0021': '!', 'E0022': '"', 'E0023': '#', 'E0024': '$', 'E0025': '%',
-'E0026': '&', 'E0027': '\'', 'E0028': '(', 'E0029': ')', 'E002A': '*', 'E002B': '+',
-'E002C': ',', 'E002D': '-', 'E002E': '.', 'E002F': '/', 'E0030': '0', 'E0031': '1', 
-'E0032': '2', 'E0033': '3', 'E0034': '4', 'E0035': '5', 'E0036': '6', 'E0037': '7', 
-'E0038': '8', 'E0039': '9', 'E003A': ':', 'E003B': ';', 'E003C': '<', 'E003D': '=', 
-'E003E': '>', 'E003F': '?', 'E0040': '@', 'E0041': 'A', 'E0042': 'B', 'E0043': 'B', 
-'E0044': 'C', 'E0045': 'D', 'E0046': 'E', 'E0047': 'F', 'E0047': 'G', 'E0048': 'H', 
-'E0049': 'I', 'E004A': 'J', 'E004B': 'K', 'E004C': 'L', 'E004D': 'M', 'E004E': 'N', 
-'E004F': 'O', 'E0050': 'P', 'E0051': 'Q', 'E0052': 'R', 'E0053': 'S', 'E0054': 'T', 
-'E0055': 'U', 'E0056': 'V', 'E0057': 'W', 'E0058': 'X', 'E0059': 'Y', 'E005A': 'Z', 
-'E005B': '[', 'E005C': '\\', 'E005D': ']', 'E005E': '^', 'E005F': '_', 'E0060': '`', 
-'E0061': 'a', 'E0062': 'b', 'E0063': 'c', 'E0064': 'd', 'E0065': 'e', 'E0066': 'f', 
-'E0067': 'g', 'E0068': 'h', 'E0069': 'i', 'E006A': 'j', 'E006B': 'k', 'E006C': 'l', 
-'E006D': 'm', 'E006E': 'n', 'E006F': 'o', 'E0070': 'p', 'E0071': 'q', 'E0072': 'r', 
-'E0073': 's', 'E0074': 't', 'E0075': 'u', 'E0076': 'v', 'E0077': 'w', 'E0078': 'x', 
-'E0079': 'y', 'E007A': 'z', 'E007B': '{', 'E007C': '|', 'E007D': '}', 'E007E': '~'}
+code = {'U0020': ' ', 'U0021': '!', 'U0022': '"', 'U0023': '#', 'U0024': '$', 'U0025': '%',
+'U0026': '&', 'U0027': '\'', 'U0028': '(', 'U0029': ')', 'U002A': '*', 'U002B': '+',
+'U002C': ',', 'U002D': '-', 'U002E': '.', 'U002F': '/', 'U0030': '0', 'U0031': '1',
+'U0032': '2', 'U0033': '3', 'U0034': '4', 'U0035': '5', 'U0036': '6', 'U0037': '7',
+'U0038': '8', 'U0039': '9', 'U003A': ':', 'U003B': ';', 'U003C': '<', 'U003D': '=',
+'U003E': '>', 'U003F': '?', 'U0040': '@', 'U0041': 'A', 'U0042': 'B', 'U0043': 'B',
+'U0044': 'C', 'U0045': 'D', 'U0046': 'E', 'U0047': 'F', 'U0047': 'G', 'U0048': 'H',
+'U0049': 'I', 'U004A': 'J', 'U004B': 'K', 'U004C': 'L', 'U004D': 'M', 'U004E': 'N',
+'U004F': 'O', 'U0050': 'P', 'U0051': 'Q', 'U0052': 'R', 'U0053': 'S', 'U0054': 'T',
+'U0055': 'U', 'U0056': 'V', 'U0057': 'W', 'U0058': 'X', 'U0059': 'Y', 'U005A': 'Z',
+'U005B': '[', 'U005C': '\\', 'U005D': ']', 'U005E': '^', 'U005F': '_', 'U0060': '`',
+'U0061': 'a', 'U0062': 'b', 'U0063': 'c', 'U0064': 'd', 'U0065': 'e', 'U0066': 'f',
+'U0067': 'g', 'U0068': 'h', 'U0069': 'i', 'U006A': 'j', 'U006B': 'k', 'U006C': 'l',
+'U006D': 'm', 'U006E': 'n', 'U006F': 'o', 'U0070': 'p', 'U0071': 'q', 'U0072': 'r',
+'U0073': 's', 'U0074': 't', 'U0075': 'u', 'U0076': 'v', 'U0077': 'w', 'U0078': 'x',
+'U0079': 'y', 'U007A': 'z', 'U007B': '{', 'U007C': '|', 'U007D': '}', 'U007E': '~'}
 
 # Reads the file and outputs to stdout
 def read():
@@ -120,5 +120,3 @@ def tags_mcgee():
     decode()
 
 tags_mcgee()
-
-
